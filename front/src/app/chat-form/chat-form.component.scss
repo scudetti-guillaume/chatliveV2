@@ -1,0 +1,49 @@
+.chat-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+/* Message entrant */
+.incoming {
+  background-color: #f0f0f0;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* Message sortant */
+.outgoing {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+}
+
+/* Conteneur du champ de saisie et du bouton */
+.input-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* Champ de saisie */
+input[type="text"] {
+  flex-grow: 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Bouton d'envoi */
+button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
