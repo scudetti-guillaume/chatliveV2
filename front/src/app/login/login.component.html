@@ -1,4 +1,5 @@
-<h2>Login</h2>
+<div class="login">
+<h2 class="login-title">Login</h2>
 <form class="login-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
         <input matInput placeholder="Pseudo" [(ngModel)]="pseudo" name="pseudo" required>
@@ -15,3 +16,8 @@
     <button mat-raised-button color="primary" type="submit">Login</button>
     </div>
 </form>
+<div class="login-noaccount" (click)="openRegisterPage()" #registerLink>
+    Vous n'avez pas encore de Compte
+</div>
+
+</div>

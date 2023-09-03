@@ -1,6 +1,14 @@
+@import '../../styles.scss' ;
+  
+
 .chat-container {
+  display: flex;
+  flex-direction: column;
   border: 1px solid #ccc;
+  background-color: $white;
   padding: 10px;
+  width: 80%;
+  min-height: 50px;
   max-height: 300px;
   overflow-y: auto;
 }
@@ -26,16 +34,21 @@
 .input-container {
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-between;
   margin-top: 10px;
+  width: 80%;
+  padding: 10px;
+  height: 4vh;
 }
 
 /* Champ de saisie */
 input[type="text"] {
-  flex-grow: 1;
-  padding: 5px;
+  width: 100%;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  margin-bottom: 2%;
 }
 
 /* Bouton d'envoi */

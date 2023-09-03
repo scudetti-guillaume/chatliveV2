@@ -38,6 +38,7 @@ exports.loginUser = async (data, callback) => {
         if (!user) {
             return callback({ success: false, error: 'Identifiants incorrects, veuillez les vérifiés' + pseudo });
         }
+        if (user.login === true) return callback({ success: false, error: 'Vous êtes déjà connecté' });
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return callback({ success: false, error: 'Identifiants incorrects, veuillez les vérifiés' + pseudo });
@@ -53,7 +54,6 @@ exports.loginUser = async (data, callback) => {
             email: user.email,
             token: token
         };
-
         callback({ success: true, message: 'Connexion réussie', loginData });
     } catch (error) {
         console.error('Erreur lors de la connexion :', error);

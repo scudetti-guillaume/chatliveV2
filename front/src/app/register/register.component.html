@@ -1,5 +1,6 @@
-<div *ngIf="modalOpen">
-<h2>Enregistrement<div (click)="closeModal()">X</div></h2>
+
+<div class="register" *ngIf="modalOpen">
+<div class="register-header"><h2 class="register-title">Enregistrement</h2><div class="register-X" (click)="closeModal()">X</div></div>
 <form class="register-form" (ngSubmit)="onSubmit()">
     <mat-form-field>
         <input matInput placeholder="Pseudo" [(ngModel)]="pseudo" name="pseudo" required>

@@ -11,6 +11,8 @@
   z-index: 1000; /* Ajustez la valeur de z-index selon vos besoins */
 }
 
+
+
 .overlay.hidden {
   display: none; /* Cachez l'overlay lorsque modalOpen est false */
 }
@@ -25,6 +27,30 @@
   margin: 0 auto;
 }
 
+.register-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: top;
+  text-align: center;
+  margin :0%;
+  background-color: #007bff;
+  padding-left: 30%;
+  margin: 0 auto;
+}
+
+.register-X{
+  text-align: right;
+  padding-right: 1%;
+}
+
+.register-X:hover {
+  color: #66cd3a;
+  text-decoration:none;
+  cursor: pointer;
+} 
+
+
 /* Center the form horizontally */
 .mat-form-field {
   display: block;
@@ -37,9 +63,6 @@
   text-align: center; /* Center the button horizontally */
 }
 
-// button {
-//   /* Additional button styles as needed */
-// }
 
 /* Style the password confirmation input */
 .mat-form-field {

@@ -53,11 +53,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 io.on('connection', (socket) => {
     console.log('Un client s\'est connecté');
+    
+    
     socket.on('chat-message-send', async (data, callback) => {
         messageRoute.registerMessage(data, (res) => {
             if (res.success) {
                 console.log(`Message reçu : ${data.text} de ${data.pseudo}`);
                 io.emit('chat-message-resend', data); // Vous devrez peut-être corriger ici
+            } else {
+                io.emit('chat-message-resend', res);
             }
         });
     });

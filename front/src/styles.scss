@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+$dark: #2e2d2d;
+$white: #ece3e3e4;
+
 
 html,
 body {
@@ -8,6 +11,15 @@ body {
 body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: $dark;
+}
+
+app-chat-form {
+    padding: 0%;
+    margin: 0%;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 .toast-position {

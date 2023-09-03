@@ -2,8 +2,9 @@
 import { Component } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ToasterService } from '../toaster.service';
-// import { ToastrService } from 'ngx-toastr';
+import { RegisterComponent } from '../register/register.component'; 
 
 
 @Component({
@@ -18,7 +19,14 @@ export class LoginComponent {
   password: string = '';
 
 
-  constructor(private socket: Socket,private toaster: ToasterService,private dialogRef: MatDialogRef<LoginComponent>) {}
+  constructor(private socket: Socket,private toaster: ToasterService,private dialogRef: MatDialogRef<LoginComponent>,private dialog: MatDialog) {}
+
+ openRegisterPage() {
+    this.dialog.open(RegisterComponent, {
+      width: '350px', // Définissez la largeur de la boîte de dialogue selon vos besoins
+      disableClose: true, // Empêche la fermeture de la boîte de dialogue en cliquant à l'extérieur
+    });
+ }
 
   closeModal() {
     this.dialogRef.close(); 

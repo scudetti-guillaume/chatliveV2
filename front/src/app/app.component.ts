@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { ChatFormComponent } from './chat-form/chat-form.component';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +8,14 @@ import { ChatFormComponent } from './chat-form/chat-form.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private socket: Socket) {}
+  constructor(private socket: Socket,private authService: AuthService) {}
+   ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      // L'utilisateur est authentifié, vous pouvez permettre l'accès aux pages protégées ici
+    } else {
+      this.authService.login();
+    }
+  }
+  
+  
 }

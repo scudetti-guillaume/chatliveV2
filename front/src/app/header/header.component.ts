@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { RegisterComponent } from '../register/register.component';
 import { LoginComponent } from '../login/login.component';
 
 @Component({
@@ -20,17 +19,5 @@ openLoginModal(): void {
     // Handle modal close event if needed
   });
 }
-
-openRegisterModal(): void {
-  const dialogRef = this.dialog.open(RegisterComponent, {
-    width: '400px', // Adjust the width as needed
-    data: {} // You can pass data to the modal if needed
-  });
-
-  dialogRef.afterClosed().subscribe(result => {
-    // Handle modal close event if needed
-  });
-}
-
 
 }

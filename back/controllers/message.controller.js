@@ -5,6 +5,7 @@ exports.registerMessage = async (data, res) => {
 console.log(data);
   try {
     const { text, pseudo, id } = data;
+    if (pseudo === null || id === null) return res({ success: false, error: "erreur veuillez réessayer" });
     const messageNew = new MessageModel({
       text: text,
       pseudo: pseudo,
