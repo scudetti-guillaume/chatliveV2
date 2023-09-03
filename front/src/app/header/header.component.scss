@@ -1,0 +1,17 @@
+ .toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background-color: #e41010;
+  color: #fff;
+}
+
+.toolbar img {
+  margin-right: 10px;
+}
+
+/* Styles pour le bouton "Register" */
+.toolbar button {
+  margin-left: 10px;
+}

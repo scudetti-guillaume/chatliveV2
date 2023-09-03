@@ -1,3 +1,4 @@
+require("./database.js");
 const express = require('express');
 const http = require('http');
 const socketIO = require('socket.io');
@@ -8,7 +9,8 @@ const fs = require("fs");
 const bodyParser = require('body-parser');
 const path = require("path");
 require("dotenv").config({ path: ".env" });
-
+const messageRoute = require("./controllers/message.controller.js");
+const userRoute = require("./controllers/user.controller.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -49,24 +51,57 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-
-// Gérez les connexions et les déconnexions des clients
 io.on('connection', (socket) => {
     console.log('Un client s\'est connecté');
-    // Gérez les événements spécifiques, par exemple, lorsqu'un client envoie un message
-    socket.on('chat-message-send', (message) => {
-        console.log(`Message reçu : ${message}`);
-        // Diffusez le message à tous les clients connectés
-        io.emit('chat-message-resend', message);
+    socket.on('chat-message-send', async (data, callback) => {
+        messageRoute.registerMessage(data, (res) => {
+            if (res.success) {
+                console.log(`Message reçu : ${data.text} de ${data.pseudo}`);
+                io.emit('chat-message-resend', data); // Vous devrez peut-être corriger ici
+            }
+        });
     });
 
-    // Gérez les déconnexions de clients
+    socket.on('register-user', async (data, callback) => {
+        userRoute.registerUser(data, (res) => {
+            console.log(res);
+            if (res.success === true) {
+                console.log(`enregistrement de ${data.pseudo}`);
+                const dataUser = {
+                    pseudo: data.pseudo,
+                    email: data.email,
+                }
+                io.emit('registration-response', res, dataUser); // Vous devrez peut-être corriger ici
+            }
+            if (res.success === false) {
+                io.emit('registration-response', res);
+            }
+        });
+    });
+
+
+    socket.on('login-user', async (data, callback) => {
+        userRoute.loginUser(data, (res) => {
+            if (res.success === true) {
+                console.log(`login de ${data.pseudo}`);
+                const dataUser = {
+                    id: data.id,
+                    pseudo: data.pseudo,
+                    email: data.email,
+                }
+                io.emit('login-response', res, dataUser); // Vous devrez peut-être corriger ici
+            }
+            if (res.success === false) {
+                io.emit('login-response', res);
+            }
+        });
+    })
     socket.on('disconnect', () => {
         console.log('Un client s\'est déconnecté');
     });
 });
 
-// Démarrez le serveur
+
 const port = process.env.PORT || 3000;
 server.listen(port, () => {
     console.log(`Serveur écoutant sur le port ${port}`);

@@ -1,13 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 
+interface ChatMessage {
+  text: string;
+  pseudo: string;
+  id: string;
+  date: Date; 
+}
+
 @Component({
   selector: 'app-chat-form',
   templateUrl: './chat-form.component.html',
   styleUrls: ['./chat-form.component.scss']
 })
+
+
 export class ChatFormComponent implements OnInit, OnDestroy {
   private socket!: Socket;
+  private pseudo: string | null = localStorage.getItem('pseudo'); // Get pseudonym from local storage
+  private userId: string | null = localStorage.getItem('id'); 
+
 
   constructor(private socketService: Socket) {}
 
@@ -16,11 +28,11 @@ export class ChatFormComponent implements OnInit, OnDestroy {
     this.socket = this.socketService;
 
     // Écoutez les événements
-    this.socket.on('chat-message-resend', (message: string) => {
-      console.log('Message reçu : ' + message);
-
+    this.socket.on('chat-message-resend', (message:ChatMessage) => {
+      
+      console.log('Message reçu : ' + message.text);
       // Traitez le message reçu, par exemple, en l'ajoutant à votre liste de messages
-      this.messages.push({ text: message, type: 'incoming' });
+      this.messages.push({ text : message.text , type: 'incoming' });
     });
   }
 
@@ -35,8 +47,14 @@ export class ChatFormComponent implements OnInit, OnDestroy {
     if (this.newMessage.trim() === '') {
       return;
     }
-    this.socket.emit('chat-message-send', this.newMessage);
-
+    const messageData = {
+    text: this.newMessage,
+    pseudo: this.pseudo, // Assuming you have a 'pseudo' property in your component
+    id: this.userId, // Assuming you have a 'userId' property in your component
+    timestamp: new Date().toISOString() // Current timestamp
+  };
+    this.socket.emit('chat-message-send', (messageData));
+        console.log('Received message:', messageData);
     // Ajoutez le message à la liste des messages sortants
     this.messages.push({ text: this.newMessage, type: 'outgoing' });
 
