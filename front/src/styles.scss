@@ -1,7 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
 $dark: #2e2d2d;
 $white: #ece3e3e4;
-
 
 html,
 body {
@@ -14,19 +12,11 @@ body {
     background-color: $dark;
 }
 
-// app-chat-form {
-//     padding: 0%;
-//     margin: 0%;
-//     width: 100vw;
-//     height: 100vh;
-//     overflow: hidden;
-// }
-
 .toast-position {
-    position: fixed;
-    width: 20%;
-    top: 15%;
-    right: 40%;
+    position:fixed ;
+    width: fit-content;
+    top: 10%;
+    right: 0%;
     margin: 0 auto;
     z-index: 1000;
 }

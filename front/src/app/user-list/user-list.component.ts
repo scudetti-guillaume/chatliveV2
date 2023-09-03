@@ -11,20 +11,21 @@ export class UserListComponent implements OnInit {
   userOnline: any[] = [];
   userOffline: any[] = [];
 
-  constructor(private socket: Socket) {}
+  constructor(private socket: Socket) { }
 
   ngOnInit(): void {
-    // Écoutez l'événement 'All-user' et mettez à jour le tableau 'users' lorsqu'il est émis
     this.socket.on('All-user', (data: any[string]) => {
-
-    data.userArray.forEach((user: { login: boolean; }) => {
-     console.log(user);
-      this.users = data.userArray;
-      if(user.login === true){
-        this.userOnline.push(user);
-    }else{
-        this.userOffline.push(user);
-    }})
+      this.userOffline = [];
+      this.userOnline = [];
+      data.userArray.forEach((user: { login: boolean; }) => {
+        console.log(user);
+        this.users = data.userArray;
+        if (user.login === true) {
+          this.userOnline.push(user);
+        } else {
+          this.userOffline.push(user);
+        }
+      })
     });
   }
 }

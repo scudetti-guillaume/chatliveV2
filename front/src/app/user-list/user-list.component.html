@@ -7,7 +7,6 @@
                 {{ user.pseudo }}
             </li>
         </ul>
-        <!-- Affiche un message si la liste est vide -->
         <p *ngIf="userOnline.length === 0">Personne n'est connecté</p>
     </div>
     <div class="user-list-offline">
@@ -18,7 +17,6 @@
                 {{ user.pseudo }}
             </li>
         </ul>
-        <!-- Affiche un message si la liste est vide -->
         <p *ngIf="userOffline.length === 0">Personne n'est hors ligne.</p>
     </div>
 </div>

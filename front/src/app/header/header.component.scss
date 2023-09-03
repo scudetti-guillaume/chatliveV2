@@ -2,7 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  padding-right: 10px;
+  padding-left: 10px;
   background-color: #e41010;
   color: #fff;
 }
@@ -11,7 +14,32 @@
   margin-right: 10px;
 }
 
-/* Styles pour le bouton "Register" */
 .toolbar button {
   margin-left: 10px;
+  height: fit-content;
+}
+
+.btn-wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-logout{
+  background-color: #e41010;
+  color: #fff;
+  border: 1px solid #fff; 
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-login {
+  background-color: #e41010;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
 }

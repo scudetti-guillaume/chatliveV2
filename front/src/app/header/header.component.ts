@@ -11,13 +11,19 @@ export class HeaderComponent {
 constructor(private dialog: MatDialog) {}
 openLoginModal(): void {
   const dialogRef = this.dialog.open(LoginComponent, {
-    width: '400px', // Adjust the width as needed
-    data: {} // You can pass data to the modal if needed
+    width: '400px', 
+    data: {} 
   });
 
-  dialogRef.afterClosed().subscribe(result => {
-    // Handle modal close event if needed
-  });
+  dialogRef.afterClosed().subscribe(result => {});
 }
+
+logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('id');
+  localStorage.removeItem('pseudo');
+  localStorage.removeItem('email');
+  window.location.reload();
+  }
 
 }

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --watch",
+    "start": "ng serve --host 192.168.1.18 --disable-host-check --watch ",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

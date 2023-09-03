@@ -1,15 +1,11 @@
 @import '../../styles.scss';
 
-
-@import '../../styles.scss';
 .user-list {
     color: $dark;
     border-radius: 10px;
     height: 320px;
     background-color:$dark;
 }
-
-
 
 .user-list-online{
 background-color: $white;
@@ -43,14 +39,12 @@ background-color: $white;
     margin-bottom: 5%;
 }
 
-
 .status-badge.online::before {
     content: '\2022';
     color: green;
     margin-right: 5px;
 }
 
-/* Style de la pastille hors ligne */
 .status-badge.offline::before {
     content: '\2022';
     color: red;
