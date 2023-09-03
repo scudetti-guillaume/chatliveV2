@@ -28,12 +28,9 @@ export class ChatFormComponent implements OnInit, OnDestroy {
   constructor(private socketService: Socket, private toaster: ToasterService,) {}
 
   ngOnInit(): void {
-    // Connectez-vous au serveur Socket.io
     this.socket = this.socketService;
 
-    // Écoutez les événements
     this.socket.on('chat-message-resend', (message:ChatMessage) => {
-      console.log('Message reçu : ' + message.pseudo);
       if(message.id === undefined && message.pseudo === undefined){
         this.toaster.showError("", 'Veuillez vous identifier pour envoyer un message')
       }
@@ -43,8 +40,19 @@ export class ChatFormComponent implements OnInit, OnDestroy {
       this.messages.push({  pseudo : message.pseudo,text : message.text , type: 'incoming' });
       }
     });
+    
+     this.socket.on('chat-message-resend-all', (messageAll: any) => {
+      messageAll.messagesArray.forEach((message: { userId: string | null; pseudo: any; text: any; }) => {
+        console.log(message.userId);
+      if(message.userId === this.userId){
+      this.messages.push({ pseudo : message.pseudo, text : message.text , type: 'outgoing' });
+      }else{
+      this.messages.push({  pseudo : message.pseudo,text : message.text , type: 'incoming' });
+      }
+      });
+    });
   }
-
+  
   ngOnDestroy(): void {
     // Vous n'avez pas besoin de déconnecter manuellement avec ngx-socket-io
   }

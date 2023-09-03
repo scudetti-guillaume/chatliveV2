@@ -58,13 +58,27 @@ io.on('connection', (socket) => {
     socket.on('chat-message-send', async (data, callback) => {
         messageRoute.registerMessage(data, (res) => {
             if (res.success) {
-                console.log(`Message reçu : ${data.text} de ${data.pseudo}`);
-                io.emit('chat-message-resend', data); // Vous devrez peut-être corriger ici
+                console.log(`Message reçu : ${data.text} de ${data.pseudo}`);        
+                io.emit('chat-message-resend', data);              
             } else {
                 io.emit('chat-message-resend', res);
             }
         });
     });
+
+    socket.on('get-all-messages', async (data, callback) => {
+        messageRoute.getAllMessages(data, (res) => {
+            if (res.success) {
+                console.log(res)
+                io.emit('chat-message-resend-all', res);
+            } 
+        });
+    });
+    
+    
+    
+
+
 
     socket.on('register-user', async (data, callback) => {
         userRoute.registerUser(data, (res) => {

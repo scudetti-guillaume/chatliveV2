@@ -1,5 +1,5 @@
 .overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* Couleur de fond grise de l'overlay */
+  background-color: rgb(0, 0, 0); /* Couleur de fond grise de l'overlay */
   position: fixed;
   top: 0;
   left: 0;
@@ -10,8 +10,6 @@
   align-items: center;
   z-index: 1000; /* Ajustez la valeur de z-index selon vos besoins */
 }
-
-
 
 .overlay.hidden {
   display: none; /* Cachez l'overlay lorsque modalOpen est false */

@@ -20,7 +20,7 @@ import { RegisterComponent } from './register/register.component';
 import { ToasterService } from './toaster.service';
 
 
-const jwtToken = localStorage.getItem('jwtToken');
+const jwtToken = localStorage.getItem('token');
 
 const customSocketConfig: SocketIoConfig = {
   url: 'http://localhost:3000',

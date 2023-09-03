@@ -11,8 +11,22 @@ console.log(data);
       pseudo: pseudo,
       userId: id,
     });
-    await messageNew.save();
+    await messageNew.save()
     res({ success: true, message: messageNew });
+  } catch (err) {
+    console.log(err);
+    return res({ success: false, error: "erreur veuillez réessayer" });
+  }
+}
+
+exports.getAllMessages = async (data, res) => {
+  try {
+    const messagesArray = []
+    const messages = await MessageModel.find();
+    messages.forEach(message => {
+    messagesArray.push(message);
+    })
+    res({ success: true, messagesArray });
   } catch (err) {
     console.log(err);
     return res({ success: false, error: "erreur veuillez réessayer" });

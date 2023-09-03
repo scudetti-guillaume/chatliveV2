@@ -11,6 +11,9 @@ export class AppComponent {
   constructor(private socket: Socket,private authService: AuthService) {}
    ngOnInit() {
     if (this.authService.isAuthenticated()) {
+     this.socket.emit('get-all-messages')
+    
+    
       // L'utilisateur est authentifié, vous pouvez permettre l'accès aux pages protégées ici
     } else {
       this.authService.login();

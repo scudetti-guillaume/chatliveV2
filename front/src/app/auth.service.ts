@@ -15,7 +15,8 @@ export class AuthService {
 
   login() {
   const dialogRef = this.dialog.open(LoginComponent, {
-    width: '400px', // Adjust the width as needed
+    width: '400px',
+    disableClose: true,// Adjust the width as needed
     data: {} // You can pass data to the modal if needed
   });
   dialogRef.afterClosed().subscribe(result => {
