@@ -38,7 +38,7 @@ exports.loginUser = async (data, callback) => {
         if (!user) {
             return callback({ success: false, error: 'Identifiants incorrects, veuillez les vérifiés' + pseudo });
         }
-        if (user.login === true) return callback({ success: false, error: 'Vous êtes déjà connecté' });
+        // if (user.login === true) return callback({ success: false, error: 'Vous êtes déjà connecté' });
         const passwordMatch = await bcrypt.compare(password, user.password);
         if (!passwordMatch) {
             return callback({ success: false, error: 'Identifiants incorrects, veuillez les vérifiés' + pseudo });
@@ -54,9 +54,28 @@ exports.loginUser = async (data, callback) => {
             email: user.email,
             token: token
         };
+        user.login = true;
+        await user.save();
+
         callback({ success: true, message: 'Connexion réussie', loginData });
     } catch (error) {
         console.error('Erreur lors de la connexion :', error);
         return callback({ success: false, error: 'Erreur lors de la connexion' });
     }
 };
+
+
+exports.getAllUser = async (data, res) => {
+    try {
+        const userArray = []
+        const users = await UserModel.find();
+        console.log(users);
+        users.forEach(user => {
+            userArray.push(user);
+        })
+        res({ success: true, userArray });
+    } catch (err) {
+        console.log(err);
+        return res({ success: false, error: "erreur veuillez réessayer" });
+    }
+}

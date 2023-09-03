@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, AfterViewChecked } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { ToasterService } from '../toaster.service'
 
@@ -16,16 +16,27 @@ interface ChatMessage {
 })
 
 
-export class ChatFormComponent implements OnInit, OnDestroy {
+export class ChatFormComponent implements OnInit, OnDestroy,AfterViewChecked {
   private socket!: Socket;
   pseudo = localStorage.getItem('pseudo');
   email = localStorage.getItem('email');
   userId = localStorage.getItem('id');
   token = localStorage.getItem('token');
+  // chatContainer: any;
 
 
 
   constructor(private socketService: Socket, private toaster: ToasterService,) {}
+   @ViewChild('chatContainer') private chatContainer!: ElementRef;
+ ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+  
+scrollToBottom(): void {
+    try {
+      this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+    } catch (err) { }
+  }
 
   ngOnInit(): void {
     this.socket = this.socketService;

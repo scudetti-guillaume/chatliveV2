@@ -58,7 +58,7 @@ io.on('connection', (socket) => {
     socket.on('chat-message-send', async (data, callback) => {
         messageRoute.registerMessage(data, (res) => {
             if (res.success) {
-                console.log(`Message reçu : ${data.text} de ${data.pseudo}`);        
+                // console.log(`Message reçu : ${data.text} de ${data.pseudo}`);        
                 io.emit('chat-message-resend', data);              
             } else {
                 io.emit('chat-message-resend', res);
@@ -69,14 +69,20 @@ io.on('connection', (socket) => {
     socket.on('get-all-messages', async (data, callback) => {
         messageRoute.getAllMessages(data, (res) => {
             if (res.success) {
-                console.log(res)
                 io.emit('chat-message-resend-all', res);
             } 
         });
     });
     
-    
-    
+    socket.on('get-all-user', async (data, callback) => {
+        userRoute.getAllUser(data, (res) => {
+            if (res.success) {
+                console.log(res)
+                io.emit('All-user', res);
+            }
+        });
+    });
+
 
 
 

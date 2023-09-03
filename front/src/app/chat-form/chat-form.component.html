@@ -1,4 +1,4 @@
-<div class="chat-container">
+<div class="chat-container"  #chatContainer>
 
     <div *ngFor="let message of messages" class="message">
         <ng-container *ngIf="message.type === 'incoming'; else outgoing">

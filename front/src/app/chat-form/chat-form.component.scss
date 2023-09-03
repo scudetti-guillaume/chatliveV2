@@ -1,19 +1,18 @@
 @import '../../styles.scss' ;
   
-
 .chat-container {
   display: flex;
   flex-direction: column;
   border: 1px solid #ccc;
+  border-radius: 10px;
   background-color: $white;
-  padding: 10px;
-  width: 80%;
+  width: 100%;
   min-height: 50px;
   max-height: 300px;
   overflow-y: auto;
+  overflow-x: auto;
 }
 
-/* Message entrant */
 .incoming {
   background-color: #f0f0f0;
   padding: 5px;
@@ -21,7 +20,6 @@
   border-radius: 5px;
 }
 
-/* Message sortant */
 .outgoing {
   background-color: #007bff;
   color: #fff;
@@ -30,19 +28,17 @@
   border-radius: 5px;
 }
 
-/* Conteneur du champ de saisie et du bouton */
 .input-container {
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: space-between;
   margin-top: 10px;
-  width: 80%;
+  width: 100%;
   padding: 10px;
   height: 4vh;
 }
 
-/* Champ de saisie */
 input[type="text"] {
   width: 100%;
   padding: 10px;
@@ -51,7 +47,6 @@ input[type="text"] {
   margin-bottom: 2%;
 }
 
-/* Bouton d'envoi */
 button {
   background-color: #007bff;
   color: #fff;

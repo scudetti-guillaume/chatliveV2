@@ -18,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ToasterService } from './toaster.service';
+import { UserListComponent } from './user-list/user-list.component';
 
 
 const jwtToken = localStorage.getItem('token');
@@ -51,6 +52,7 @@ const customSocketConfig: SocketIoConfig = {
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
