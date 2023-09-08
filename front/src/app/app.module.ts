@@ -9,6 +9,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
+import { DatePipe } from '@angular/common'; 
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
@@ -19,31 +20,20 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { ToasterService } from './toaster.service';
 import { UserListComponent } from './user-list/user-list.component';
-
+import { UserModalComponent } from './user-modal/user-modal.component';
 
 const jwtToken = localStorage.getItem('token');
 
 const customSocketConfig: SocketIoConfig = {
-  url: 'http://localhost:3000',
+  url: 'https://www.lesiteduscudo.com',
+  //  url: 'http://localhost:5000',
   options: {
-    transports: ['websocket', 'flashsocket', 'htmlfile', 'xhr-polling', 'jsonp-polling', 'polling'],
-    transportOptions: {
-        polling: {
-          extraHeaders: {
-            Authorization: `Bearer ${jwtToken}` 
-          }
-        }
-      }
-  },
-  
+    path: "/chatsocV2/backend",
+    extraHeaders: {
+      Authorization: `Bearer ${jwtToken}`
+    }
+  }
 };
-
-// const customToastConfig = {
-//       positionClass: 'toast-top-center', 
-//       progressBar: true, 
-//       preventDuplicates: true, 
-//       closeButton: false,
-// }
 
 @NgModule({
   declarations: [
@@ -53,6 +43,7 @@ const customSocketConfig: SocketIoConfig = {
     LoginComponent,
     RegisterComponent,
     UserListComponent,
+    UserModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,7 +59,7 @@ const customSocketConfig: SocketIoConfig = {
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [ToasterService],
+  providers: [ToasterService, DatePipe,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

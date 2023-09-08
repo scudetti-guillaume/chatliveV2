@@ -4,7 +4,8 @@
         <ul class="user-list-ul-online">
             <li *ngFor="let user of userOnline">
                 <span class="status-badge" [ngClass]="{ 'online': !user.isOnline, 'offline': user.isOnline }"></span>
-                {{ user.pseudo }}
+                <img class="li-picture-user" [src]="user.pictureUser" alt="Photo de profil" width="20px" height="20px" />
+               {{ user.pseudo }}
             </li>
         </ul>
         <p *ngIf="userOnline.length === 0">Personne n'est connecté</p>
@@ -14,6 +15,7 @@
         <ul class="user-list-ul-offline">
             <li *ngFor="let user of userOffline">
                 <span class="status-badge" [ngClass]="{ 'offline': !user.isOnline }"></span>
+                <img class="picture-img" [src]="user.pictureUser" alt="Photo de profil" width="20px" height="20px" />
                 {{ user.pseudo }}
             </li>
         </ul>

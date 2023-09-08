@@ -11,16 +11,24 @@ export class UserListComponent implements OnInit {
   userOnline: any[] = [];
   userOffline: any[] = [];
 
+
   constructor(private socket: Socket) { }
 
   ngOnInit(): void {
+  
+    // this.socket.on('user-online', ({} ) => {
+    //   this.socket.emit('get-all-user');
+    // });
+  
+
     this.socket.on('All-user', (data: any[string]) => {
       this.userOffline = [];
       this.userOnline = [];
       data.userArray.forEach((user: { login: boolean; }) => {
-        console.log(user);
         this.users = data.userArray;
         if (user.login === true) {
+         console.log(user);
+         
           this.userOnline.push(user);
         } else {
           this.userOffline.push(user);

@@ -52,12 +52,14 @@ export class LoginComponent {
         localStorage.setItem('pseudo', response.loginData.pseudo);
         localStorage.setItem('email', response.loginData.email);
         localStorage.setItem('token', response.loginData.token);
+        localStorage.setItem('picture', response.loginData.pictureUser);
         setTimeout(() => {
           this.pseudo = '';
           this.email = '';
           this.password = '';
           this.dialogRef.close();
           this.socket.emit('get-all-messages');
+          this.socket.emit('get-all-user');
           window.location.reload();
         }, 3000);
       } else {

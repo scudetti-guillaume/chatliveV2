@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from './login/login.component';
 
+
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,) { }
 
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
@@ -23,10 +25,5 @@ export class AuthService {
     dialogRef.afterClosed().subscribe(result => { });
   }
 
-  logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('id');
-    localStorage.removeItem('pseudo');
-    localStorage.removeItem('email');
-  }
+
 }

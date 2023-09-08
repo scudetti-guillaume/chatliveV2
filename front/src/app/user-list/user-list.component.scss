@@ -51,13 +51,15 @@ background-color: $white;
     margin-right: 5px;
 }
 
-li{
-background-color: $white;
-border-radius: 10px;
-color: $dark;
-margin-bottom: 1%;
-padding-left: 2%;
-
+li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: $white;
+    border-radius: 10px;
+    color: $dark;
+    margin-bottom: 1%;
+    padding-left: 2%;
 }
 
 ul {
@@ -67,4 +69,12 @@ ul {
     color: antiquewhite;
 }
 
+.li-picture-user{
+border-radius: 50%;
 
+}
+.li-pseudo-user{
+text-align: center;
+
+
+}

@@ -17,6 +17,7 @@ exports.registerUser = async (data, callback) => {
             pseudo,
             email,
             password: hashedPassword,
+            pictureUser: `${process.env.BASE_IMAGE_DEFAULT}`
         });
         await newUser.save();
         callback({ success: true, message: 'Inscription réussie' });
@@ -52,7 +53,8 @@ exports.loginUser = async (data, callback) => {
             id: user._id,
             pseudo: user.pseudo,
             email: user.email,
-            token: token
+            token: token,
+            pictureUser: user.pictureUser
         };
         user.login = true;
         await user.save();
@@ -64,16 +66,53 @@ exports.loginUser = async (data, callback) => {
     }
 };
 
+exports.logoutUser = async (data, callback) => {
+    try {
+        const { id,pseudo } = data;
+        console.log(data);
+        const user = await UserModel.findByIdAndUpdate(data.userId,{login:false});
+        console.log(user);
+        if (!user) {
+            return callback({ success: false, error: 'Identifiants incorrects, veuillez les vérifiés' + pseudo });
+        }
+        const logoutData = {
+            id: user._id,
+            pseudo: user.pseudo,
+        };
+        console.log(user);
+        user.login = false;
+        await user.save();
+
+        callback({ success: true, message: 'Connexion réussie', logoutData });
+    } catch (error) {
+        console.error('Erreur lors de la connexion :', error);
+        return callback({ success: false, error: 'Erreur lors de la connexion' });
+    }
+};
+
+
 
 exports.getAllUser = async (data, res) => {
     try {
         const userArray = []
         const users = await UserModel.find();
-        console.log(users);
         users.forEach(user => {
-            userArray.push(user);
+        const userPush = { _id: user._id, pseudo: user.pseudo, email: user.email, login: user.login, pictureUser:user.pictureUser}
+            userArray.push(userPush);
         })
         res({ success: true, userArray });
+    } catch (err) {
+        console.log(err);
+        return res({ success: false, error: "erreur veuillez réessayer" });
+    }
+}
+
+
+exports.getUser = async (data, res) => {
+console.log(data);
+    try {
+        const user = await UserModel.findById(data);
+        res({ success: true, user});
     } catch (err) {
         console.log(err);
         return res({ success: false, error: "erreur veuillez réessayer" });

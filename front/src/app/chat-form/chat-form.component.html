@@ -1,19 +1,57 @@
-<div class="chat-container"  #chatContainer>
-
-    <div *ngFor="let message of messages" class="message">
+<div class="chat-container" #chatContainer>
+    <div *ngFor="let message of messages" class="message-container">
         <ng-container *ngIf="message.type === 'incoming'; else outgoing">
-            <div class="incoming">{{ message.pseudo }}: {{ message.text }}</div>
+            <div class="incoming">
+             <div class="user-info-wrapper">
+                <img class="picture-img" [src]="message.pictureUser" alt="Photo de profil" width="25px" height="25px" />
+                <div class="pseudo" (click)="openPopup(message.userId)">{{ message.pseudo }}</div>
+                </div>
+                <div class="message">{{ message.text }}</div>
+                <div class="date">{{ message.date }}</div>
+            </div>
         </ng-container>
         <ng-template #outgoing>
-            <div class="outgoing">{{ message.pseudo }}: {{ message.text }}</div>
+            <div class="outgoing">
+            <div class="user-info-wrapper">
+                <img class="picture-img" [src]="message.pictureUser" alt="Photo de profil" width="25px" height="25px" />
+                <div class="pseudo" (click)="openPopup(message.userId)">{{ message.pseudo }}</div>
+            </div>
+                <div class="message">{{ message.text }}</div>
+                <div class="date">{{ message.date }}</div>
+            </div>
         </ng-template>
     </div>
 </div>
+
+
 <div class="input-container">
     <input type="text" [(ngModel)]="newMessage" (keyup.enter)="sendMessage()"
         placeholder="Saisissez votre message..." />
     <button (click)="sendMessage()">Envoyer</button>
 </div>
 
-
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display': displayStyle}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{userProfileData.pseudo}}</h4>
+            </div>
+            <div class="modal-body">
+                <ng-container *ngIf="userProfileData.userId === userId; else differentContent">
+                    <!-- Afficher le champ d'entrée de fichier pour changer la photo -->
+                    <div>
+                        <input #fileInput type="file" accept="jpg,.jpeg,.png,.gif" (change)="onFileSelected($event)">
+                    </div>
+                </ng-container>
+                <ng-template #differentContent>
+                    <p>Ajouter en Ami</p>
+                </ng-template>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" (click)="closePopup()">Fermer</button>
+                <button type="button" class="btn btn-primary" (click)="updateProfile()">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
 

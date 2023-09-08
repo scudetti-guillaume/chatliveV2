@@ -1,13 +1,21 @@
  .toolbar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding-top: 0px;
   padding-bottom: 10px;
   padding-right: 10px;
   padding-left: 10px;
   background-color: #e41010;
   color: #fff;
+  text-align: center;
+}
+
+.title {
+margin-left: auto;
+text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .toolbar img {
@@ -20,6 +28,7 @@
 }
 
 .btn-wrapper{
+margin-left: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

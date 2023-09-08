@@ -13,10 +13,13 @@ const messageSchema = new mongoose.Schema({
     type: String,
     // required: true,
   },
-  timestamp: {
-    type: Date,
-    default: Date.now,
+  date: {
+    type: String,
+    // default: Date.now,
   },
+  pictureUser: {
+    type: String,
+  }
 });
 
 module.exports = mongoose.model('Message', messageSchema);
